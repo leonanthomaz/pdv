@@ -1,57 +1,57 @@
-# PDV (Ponto de Venda)
+# Ponto de Venda (PDV)
 
-O PDV (Ponto de Venda) é um sistema completo de caixa registrado que permite aos usuários gerenciar vendas, estoques e transações financeiras de forma eficiente. O sistema foi desenvolvido utilizando Java com Spring Boot para o servidor, Spring Security para autenticação com JWT (JSON Web Tokens) para segurança, e React com Material UI e Styled Components para o frontend.
-
-## Funcionalidades Principais
-
-- Registro de vendas de produtos.
-- Controle de estoque.
-- Autenticação de usuários com geração de token JWT.
-- Cálculo de subtotal, total e troco.
-- Gerenciamento de abertura e fechamento de caixa.
-- Interface amigável e responsiva com Material UI e Styled Components.
+Este é um projeto de um sistema de ponto de venda (PDV) desenvolvido para gerenciar operações de vendas em uma loja. O sistema oferece funcionalidades como registro de vendas, adição de produtos ao carrinho, recebimento de pagamentos e fechamento de caixa.
 
 ## Tecnologias Utilizadas
 
-### Backend (Java Spring Boot)
+### Backend
+- Linguagem de Programação: Java
+- Framework Web: Spring Boot
+- Banco de Dados: MySQL (produção), H2 (teste)
+- ORM: Hibernate
+- Autenticação e Autorização: Spring Security
+- API RESTful: Spring MVC
+- Ferramenta de Build: Maven
+- Testes: JUnit, Mockito
 
-- **Spring Boot:** Framework para criação de aplicativos Java baseados em Spring.
-- **Spring Security:** Estrutura de segurança para autenticação e autorização.
-- **JWT (JSON Web Tokens):** Mecanismo para autenticação de usuários e geração de tokens seguros.
-- **Spring Data JPA:** Facilita a interação com bancos de dados relacionais.
-- **Spring Web:** Suporte para criar aplicativos da web usando Spring MVC e RESTful.
+### Frontend
+- Biblioteca de Interface: React.js
+- Estilização: Material-UI, Styled Components
+- Gerenciamento de Estado: React Hooks (useState, useEffect)
+- Requisições HTTP: Axios
+- Controle de Rotas: React Router
+- Autenticação: Context API
 
-### Frontend (React)
+## Funcionalidades
 
-- **React:** Biblioteca JavaScript para construir interfaces de usuário.
-- **Material UI:** Biblioteca de componentes React para um design rápido e responsivo.
-- **Styled Components:** Biblioteca para estilizar componentes React com estilos baseados em JavaScript.
+- Abrir e fechar o caixa
+- Adicionar produtos ao carrinho
+- Registrar vendas
+- Receber pagamentos
+- Visualizar subtotal, total e troco
 
-## Instalação e Configuração
+## Como Executar o Projeto
 
-1. Clone o repositório: `git clone https://github.com/seu-usuario/PDV.git`
-2. Configure as variáveis de ambiente no arquivo `.env` do frontend:
-```
-REACT_APP_API_URL=http://localhost:8080
-```
-4. Inicie o servidor backend: `mvn spring-boot:run` (dentro da pasta do projeto Java Spring Boot)
-5. Inicie o servidor frontend: `npm start` (dentro da pasta do projeto React)
+1. **Backend:**
+   - Navegue até o diretório `backend`
+   - Execute o comando `mvn spring-boot:run` para iniciar o servidor backend
 
-## Uso
+2. **Frontend:**
+   - Navegue até o diretório `frontend`
+   - Execute o comando `npm install` para instalar as dependências
+   - Execute o comando `npm start` para iniciar o servidor de desenvolvimento do frontend
 
-1. Faça login com suas credenciais.
-2. Após o login bem-sucedido, você poderá acessar a tela de abertura de caixa.
-3. Durante a operação do PDV, você pode escanear o código de barras dos produtos e adicionar à lista de vendas.
-4. Ao fechar a venda, o sistema calculará o subtotal, o valor recebido e o troco.
+## Próximos Passos
+
+- Implementar testes automatizados (JUnit, Mockito)
+- Aprimorar tratamento de erros e mensagens de feedback
+- Otimizar o desempenho do sistema
+- Escrever documentação detalhada
 
 ## Contribuição
 
-- Clone o repositório: `git clone https://github.com/seu-usuario/PDV.git`
-- Crie uma nova branch: `git checkout -b nova-funcionalidade`
-- Faça suas alterações e commit: `git commit -am 'Adicionar nova funcionalidade'`
-- Push para a branch: `git push origin nova-funcionalidade`
-- Envie um pull request
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request com melhorias, correções de bugs ou novas funcionalidades.
 
 ## Licença
 
-Este projeto está licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
