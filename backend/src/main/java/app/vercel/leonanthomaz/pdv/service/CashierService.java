@@ -83,7 +83,7 @@ public class CashierService {
 
             if (existingItem != null) {
                 existingItem.setQuantity(existingItem.getQuantity() + 1);
-                existingItem.setTotalPrice(existingItem.getTotalPrice().add(existingItem.getPrice()));
+                existingItem.setTotalPrice(existingItem.getPrice().multiply(BigDecimal.valueOf(existingItem.getQuantity())));
             } else {
                 CashierItem newItem = CashierItem.builder()
                         .cashier(cashier)
