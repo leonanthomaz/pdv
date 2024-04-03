@@ -181,22 +181,23 @@ export const Dashboard = () => {
     <Container maxWidth="lg">
       <D.DashboardContainer>
         <Typography variant="h4" align="center" gutterBottom style={{ fontSize: '50px', color: codeCashier.length > 0 ? '#005eff' : '#000000' }}>
-          <span style={{ color: codeCashier.length > 0 ? '#ff8c00' : '#000000', fontWeight: 700 }}>{codeCashier.length > 0 ? "CAIXA ABERTO" : "CAIXA FECHADO"}</span>
-          {/* <span style={{ color: codeCashier.length > 0 || localStorage.getItem('codeCashier') ? '#ff8c00' : '#000000', fontWeight: 700 }}>
+          <span style={{ color: codeCashier.length > 0 ? '#10489c' : '#000000', fontWeight: 700 }}>{codeCashier.length > 0 ? "CAIXA ABERTO" : "CAIXA FECHADO"}</span>
+          {/* <span style={{ color: codeCashier.length > 0 || localStorage.getItem('codeCashier') ? '#10489c' : '#000000', fontWeight: 700 }}>
             {codeCashier.length > 0 || localStorage.getItem('codeCashier') ? (localStorage.getItem('codeCashier') ? 'AGUARDANDO' : 'CAIXA ABERTO') : 'CAIXA FECHADO'}
           </span> */}
         </Typography>
-        <Typography variant="subtitle1" align="center" gutterBottom style={{ color: '#ff8c00' }}>
+        <Typography variant="subtitle1" align="center" gutterBottom style={{ color: '#10489c' }}>
           Operador: {user.name} - Matrícula: {user.registration}
         </Typography>
-        <Typography variant="subtitle1" align="center" gutterBottom style={{ color: '#ff8c00' }}>
+        <Typography variant="subtitle1" align="center" gutterBottom style={{ color: '#10489c' }}>
           {currentTime}
         </Typography>
 
         <Grid container spacing={3} style={{ marginTop: '20px' }}>
           <Grid item xs={12} md={4}>
             <D.LogoContainer elevation={3}>
-              <D.Logo src="https://yakissobadelivery.wabiz.delivery/stores/yakissobadelivery/img/homeLogo.png?20240306191100" alt="Logo do mercado" />
+            <D.Logo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Logo_MetroRio.svg/1200px-Logo_MetroRio.svg.png" alt="Logo do mercado" />
+              {/* <D.Logo src="https://yakissobadelivery.wabiz.delivery/stores/yakissobadelivery/img/homeLogo.png?20240306191100" alt="Logo do mercado" /> */}
             </D.LogoContainer>
           </Grid>
 
@@ -206,12 +207,12 @@ export const Dashboard = () => {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px' }}>ITEM</TableCell>
-                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px' }}>CÓDIGO</TableCell>
-                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px' }}>DESCRIÇÃO</TableCell>
-                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px' }}>QTD</TableCell>
-                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px' }}>VALOR UNT</TableCell>
-                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px' }}>TOTAL</TableCell>
+                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px' }}>ITEM</TableCell>
+                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px' }}>CÓDIGO</TableCell>
+                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px' }}>DESCRIÇÃO</TableCell>
+                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px' }}>QTD</TableCell>
+                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px' }}>VALOR UNT</TableCell>
+                      <TableCell variant="h6" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px' }}>TOTAL</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -236,7 +237,7 @@ export const Dashboard = () => {
 
               <Grid item xs={12}>
                 <D.Card elevation={3}>
-                  <Typography variant="h6" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }}>
+                  <Typography variant="h6" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }}>
                     CÓDIGO
                   </Typography>
                   <Typography variant="subtitle1" align="center" style={{ fontWeight: 'bold' }}>{codeCashier.length > 0 ? codeCashier : 'Sem código' }</Typography>
@@ -245,7 +246,7 @@ export const Dashboard = () => {
 
               <Grid item xs={12}>
                 <D.Card elevation={3}>
-                  <Typography variant="h6" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }}>
+                  <Typography variant="h6" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }}>
                     PREÇO
                   </Typography>
                   <Typography variant="subtitle1" align="center">R$ {cartItems.length > 0 ? String(cartItems[0].price.toFixed(2)).replace('.', ',') : '0,00'}</Typography>
@@ -254,7 +255,7 @@ export const Dashboard = () => {
 
               <Grid item xs={12}>
                 <D.Card elevation={3}>
-                  <Typography variant="h6" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }}>
+                  <Typography variant="h6" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }}>
                     TOTAL
                   </Typography>
                   <Typography variant="subtitle1" align="center">R$ {cartItems.length > 0 ? String(cartItems[0].totalPrice.toFixed(2)).replace('.', ',') : '0,00'}</Typography>
@@ -299,7 +300,7 @@ export const Dashboard = () => {
 
         <Grid container spacing={3} style={{ marginTop: '10px' }}>
           <Grid item xs={12} md={6}>
-            <Typography variant="h6" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }}>
+            <Typography variant="h6" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }}>
               Comandos do Sistema
             </Typography>
             <Paper elevation={3} style={{ padding: '10px', marginBottom: '20px'}}>
@@ -317,17 +318,17 @@ export const Dashboard = () => {
                 <Table>
                   <TableBody>
                     <TableRow>
-                      <TableCell variant="head" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }} colSpan={3}><h1>Subtotal</h1></TableCell>
+                      <TableCell variant="head" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }} colSpan={3}><h1>Subtotal</h1></TableCell>
                       <TableCell variant="body" align="center" colSpan={3} style={{ fontSize: '40px', fontWeight: 'bold' }}>R$ {total ? String(total.toFixed(2)).replace('.', ',') : '0,00'}</TableCell>
                     </TableRow>
                     {valueEntered && (
                       <>
                         <TableRow>
-                          <TableCell variant="head" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }} colSpan={3}>Total Recebido</TableCell>
+                          <TableCell variant="head" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }} colSpan={3}>Total Recebido</TableCell>
                           <TableCell variant="body" align="center" colSpan={3} style={{ fontWeight: 'bold' }}>R$ {totalReceived ? String(totalReceived.toFixed(2)).replace('.', ',') : '0,00'}</TableCell>
                         </TableRow>
                         <TableRow>
-                          <TableCell variant="head" align="center" style={{ backgroundColor: '#ff8c00', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }} colSpan={3}>Troco</TableCell>
+                          <TableCell variant="head" align="center" style={{ backgroundColor: '#10489c', color: 'white', padding: '5px', fontSize: '16px', fontWeight: 'bold' }} colSpan={3}>Troco</TableCell>
                           <TableCell variant="body" align="center" colSpan={3} style={{ fontWeight: 'bold' }}>
                             {/* Mostrando o troco */}
                             { changeValue || changeValue >= 0 ? 'R$' + String(parseFloat(changeValue).toFixed(2)).replace('.', ',') : '' }
