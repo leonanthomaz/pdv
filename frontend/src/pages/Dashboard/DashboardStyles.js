@@ -18,7 +18,8 @@ margin-top: 10px;
 `;
 
 export const Logo = styled('img')(() => ({
-  maxWidth: '200px',
+  width: '250px',
+  height: '250px'
 }));
 
 export const CardsContainer = styled('div')(() => ({

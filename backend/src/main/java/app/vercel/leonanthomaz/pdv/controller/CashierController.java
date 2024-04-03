@@ -28,9 +28,10 @@ public class CashierController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cashier.getCode());
     }
 
-    @GetMapping("{code}")
-    public ResponseEntity<Cashier> findByCode(@PathVariable String code) {
+    @GetMapping("find")
+    public ResponseEntity<Cashier> findByCode(@RequestParam(name = "code", required = false) String code) {
         Cashier obj = cashierService.findByCode(code);
+        log.info("ENCONTRADO: {}", obj);
         return ResponseEntity.ok().body(obj);
     }
 
