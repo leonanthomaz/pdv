@@ -9,27 +9,26 @@ export const createCashier = async (setCodeCashier) => {
   }
 };
 
-export const addItemToCart = async (inputValue, codeCashier, setCartItems, setTotal) => {
-    try {  
+export const addItemToCart = async (inputValue, codeCashier, setCartItems, setTotal, setTotalForItems) => {
+  try {  
       if (inputValue) {
-        const response = await axios.post(`http://localhost:8080/cashier/add-item`, { code: codeCashier, codeBar: inputValue });
-        console.log('Produto adicionado ao carrinho com sucesso:', response.data);
-        // Verifica se a resposta possui a propriedade "items" e não está vazia
-        if (response.data && response.data.items && response.data.items.length > 0) {
-          setCartItems(response.data.items); // Atualiza o estado do carrinho com os itens retornados pelo backend
-          let subtotal = 0;
-          response.data.items.forEach(item => {
-            subtotal += item.totalPrice; // Soma o preço total de cada item ao subtotal
-          });
-          setTotal(subtotal); // Atualiza o estado do subtotal
-        } else {
-          console.error('A resposta do servidor não possui itens válidos:', response.data);
-        }
+          const response = await axios.post(`http://localhost:8080/cashier/add-item`, { code: codeCashier, codeBar: inputValue });
+          console.log('Produto adicionado ao carrinho com sucesso:', response.data);
+          if (response.data && response.data.items && response.data.items.length > 0) {
+              setCartItems(response.data.items); // Atualiza o estado do carrinho com os itens retornados pelo backend
+              setTotal(response.data.total); // Atualiza o estado do subtotal com o valor retornado pelo backend
+              
+              // Calcula o total para cada item individualmente
+              const totalForItems = response.data.items.map(item => item.totalPrice);
+              setTotalForItems(totalForItems); // Atualiza o estado com os totais por item
+          } else {
+              console.error('A resposta do servidor não possui itens válidos:', response.data);
+          }
       }      
-    } catch (error) {
+  } catch (error) {
       console.error('Erro ao adicionar produto:', error);
-    }
-};   
+  }
+};
 
 export const finalizePurchase = async (inputValue, codeCashier, setChangeValue, setTotalReceived, setValueEntered) => {
   try {

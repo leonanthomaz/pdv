@@ -1,7 +1,7 @@
 package app.vercel.leonanthomaz.pdv.config.auth;
 
-import app.vercel.leonanthomaz.pdv.config.auth.token.TokenService;
 import app.vercel.leonanthomaz.pdv.repository.UserRepository;
+import app.vercel.leonanthomaz.pdv.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

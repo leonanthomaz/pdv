@@ -36,15 +36,15 @@ export const Login = () => {
       });
 
       localStorage.setItem('token', response.data.token);
-      console.log("TOKEN: " + response.data.token)
+      // console.log("TOKEN: " + response.data.token)
       dispatch({ type: 'SET_TOKEN', payload: response.data.token });
-      console.log("USER: " + response.data.user)
-      console.log("Sucesso! Dados: ", response.data);
+      // console.log("USER: " + response.data.user)
+      // console.log("Sucesso! Dados: ", response.data);
 
       // Redirecionar para o dashboard após definir o token
       navigate('/dashboard');
     } catch (error) {
-      console.error('Erro ao enviar dados para a API:', error);
+      // console.error('Erro ao enviar dados para a API:', error);
       dispatch({ type: 'SET_ERROR', payload: error.message });
     }
   };
@@ -52,7 +52,7 @@ export const Login = () => {
   return (
     <Container maxWidth="xs">
       <Typography variant="h4" align="center" gutterBottom>
-        Login
+        Entrar
       </Typography>
       <StyledForm onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -71,7 +71,7 @@ export const Login = () => {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Password"
+              label="Senha"
               name="password"
               type="password"
               value={formData.password}
@@ -82,7 +82,7 @@ export const Login = () => {
           </Grid>
         </Grid>
         <StyledButton type="submit" fullWidth variant="contained" color="primary">
-          Login
+          Enviar
         </StyledButton>
       </StyledForm>
       <Typography variant="body2" align="center">

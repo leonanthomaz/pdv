@@ -1,11 +1,11 @@
 package app.vercel.leonanthomaz.pdv.controller;
 
-import app.vercel.leonanthomaz.pdv.config.auth.dto.TokenDTO;
-import app.vercel.leonanthomaz.pdv.config.auth.token.TokenService;
 import app.vercel.leonanthomaz.pdv.dto.LoginDTO;
 import app.vercel.leonanthomaz.pdv.dto.RegisterDTO;
+import app.vercel.leonanthomaz.pdv.dto.TokenDTO;
 import app.vercel.leonanthomaz.pdv.model.User;
 import app.vercel.leonanthomaz.pdv.repository.UserRepository;
+import app.vercel.leonanthomaz.pdv.service.TokenService;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

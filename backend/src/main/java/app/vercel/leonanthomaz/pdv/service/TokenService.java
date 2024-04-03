@@ -1,4 +1,4 @@
-package app.vercel.leonanthomaz.pdv.config.auth.token;
+package app.vercel.leonanthomaz.pdv.service;
 
 import app.vercel.leonanthomaz.pdv.model.User;
 import app.vercel.leonanthomaz.pdv.repository.UserRepository;
@@ -14,15 +14,25 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+/**
+ * Serviço para criação, validação e obtenção de informações a partir de tokens JWT.
+ */
 @Service
 @Log4j2
 public class TokenService {
 
     private String secret = "MinhaPalavra";
-    @Autowired
-    private UserRepository userRepository; // Injete o repositório do usuário aqui.
 
-    public String createToken(User user){
+    @Autowired
+    private UserRepository userRepository;
+
+    /**
+     * Cria um token JWT para o usuário.
+     *
+     * @param user O usuário para o qual o token será criado.
+     * @return O token JWT gerado.
+     */
+    public String createToken(User user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
@@ -36,7 +46,13 @@ public class TokenService {
         }
     }
 
-    public String validateToken(String token){
+    /**
+     * Valida um token JWT e retorna o registro do usuário associado a ele.
+     *
+     * @param token O token JWT a ser validado.
+     * @return O registro do usuário associado ao token.
+     */
+    public String validateToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
@@ -50,6 +66,12 @@ public class TokenService {
         }
     }
 
+    /**
+     * Obtém os detalhes do usuário a partir de um token JWT.
+     *
+     * @param token O token JWT contendo as informações do usuário.
+     * @return Os detalhes do usuário.
+     */
     public User getUserDetailsFromToken(String token) {
         try {
             String registration = JWT.require(Algorithm.HMAC256(secret))
@@ -64,9 +86,12 @@ public class TokenService {
         }
     }
 
-    private Instant genExpirationDate(){
+    /**
+     * Gera a data de expiração para o token JWT (2 horas a partir do momento atual).
+     *
+     * @return A data de expiração do token.
+     */
+    private Instant genExpirationDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
-
-
 }

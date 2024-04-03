@@ -1,7 +1,7 @@
 package app.vercel.leonanthomaz.pdv.controller;
 
 import app.vercel.leonanthomaz.pdv.dto.ReceivedAmountDTO;
-import app.vercel.leonanthomaz.pdv.dto.ResponseDTO;
+import app.vercel.leonanthomaz.pdv.dto.AddItemToCashierDTO;
 import app.vercel.leonanthomaz.pdv.dto.UpdateStatusDTO;
 import app.vercel.leonanthomaz.pdv.model.Cashier;
 import app.vercel.leonanthomaz.pdv.service.CashierService;
@@ -35,7 +35,7 @@ public class CashierController {
     }
 
     @PostMapping("add-item")
-    public ResponseEntity<Cashier> addItemToCashier(@RequestBody ResponseDTO data) {
+    public ResponseEntity<Cashier> addItemToCashier(@RequestBody AddItemToCashierDTO data) {
         Cashier updatedCashier = cashierService.addItemToCashier(data.getCode(), data.getCodeBar());
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedCashier);
     }

@@ -31,7 +31,7 @@ export const Register = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/auth/register', {
+      await axios.post('http://localhost:8080/auth/register', {
         name: formData.name,
         registration: formData.registration,
         email: formData.email,
@@ -39,7 +39,7 @@ export const Register = () => {
         role: formData.role
       });
             
-      console.log("Sucesso! Dados: ", response.data);
+      // console.log("Sucesso! Dados: ", response.data);
     } catch (error) {
       console.error('Erro ao enviar dados para a API:', error);
       dispatch({ type: 'SET_ERROR', payload: error.message });

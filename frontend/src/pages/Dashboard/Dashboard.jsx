@@ -13,6 +13,8 @@ export const Dashboard = () => {
   const [cartItems, setCartItems] = useState([]);
   //Total da compra
   const [total, setTotal] = useState(0);
+  //Total da compra
+  const [totalForItems, setTotalForItems] = useState(0);
   //Função de tempo
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }));
   //Valor recebido
@@ -21,8 +23,6 @@ export const Dashboard = () => {
   const [changeValue, setChangeValue] = useState('');
   //Ativação do input de recebimento do valor 
   const [valueEntered, setValueEntered] = useState(false);
-
-  console.log("VALOR RECEBIDO: " + totalReceived)
 
   //Usuário
   const { user, logout } = useAuth();
@@ -140,7 +140,7 @@ export const Dashboard = () => {
   const handleInput = async (inputValue) => {
     switch (modalTitle) {
       case 'Adicionar Produto':
-        DashboardFunctions.addItemToCart(inputValue, codeCashier, setCartItems, setTotal);
+        DashboardFunctions.addItemToCart(inputValue, codeCashier, setCartItems, setTotal, setTotalForItems);
         break;
       case 'Finalizar Venda':
         DashboardFunctions.finalizePurchase(inputValue, codeCashier, setChangeValue, setTotalReceived, setValueEntered, finishSale);
