@@ -1,6 +1,6 @@
 package app.vercel.leonanthomaz.pdv.config.auth;
 
-import app.vercel.leonanthomaz.pdv.repository.UserRepository;
+import app.vercel.leonanthomaz.pdv.repository.AuthRepository;
 import app.vercel.leonanthomaz.pdv.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,14 +21,14 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     private TokenService tokenService;
     @Autowired
-    private UserRepository userRepository;
+    private AuthRepository authRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
         if(token != null){
             var registration = tokenService.validateToken(token);
-            UserDetails user = userRepository.findByRegistration(registration);
+            UserDetails user = authRepository.findByRegistration(registration);
 
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);

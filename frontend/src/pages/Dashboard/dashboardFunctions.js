@@ -1,40 +1,38 @@
 import axios from 'axios';
 
-// Função para criar um novo caixa ou recuperar do localStorage
-export const createCashier = async (setCodeCashier, setCartItems, setTotal) => {
+export const createCashier = async (setCodeCashier, setCartItems, setTotal, finishSale) => {
   try {
-    // Verifica se há um caixa no localStorage
     const localStorageCashier = localStorage.getItem('codeCashier');
-    console.log("CODIGO ENCONTRADO: " + localStorageCashier)
 
     if (localStorageCashier && localStorageCashier !== null) {
-      // Traz o caixa existente
       const response = await axios.get(`http://localhost:8080/cashier/find?code=${localStorageCashier}`);
-      console.log("ANALISANDO NO BANCO : " + response.data)   
+      
+      if (response.data && response.data.status === "FINISHED") {
+        localStorage.removeItem('codeCashier');
+        finishSale();
+        return;
+      }
 
       if (response.data && response.data.items && response.data.items.length > 0) {
         setCodeCashier(localStorageCashier);
         setCartItems(response.data.items);
         setTotal(response.data.total);
-        console.log("ITENS : " + response.data.items)   
-        console.log("TOTAL : " + response.data.total)   
+        return;
       } else {
         console.error('A resposta do servidor não possui itens válidos:', response.data);
       }
-      return;
     }
 
-    // Se não houver caixa no localStorage, cria um novo
     const response = await axios.post('http://localhost:8080/cashier/create');
     const newCodeCashier = response.data;
     setCodeCashier(newCodeCashier);
 
-    // Armazena o novo caixa no localStorage
     localStorage.setItem('codeCashier', newCodeCashier);
   } catch (error) {
     console.error('Erro ao criar o caixa:', error);
   }
 };
+
 
 export const addItemToCart = async (inputValue, codeCashier, setCartItems, setTotal) => {
   try {  
@@ -56,8 +54,7 @@ export const addItemToCart = async (inputValue, codeCashier, setCartItems, setTo
 export const finalizePurchase = async (codeCashier) => {
   try {
     const response = await axios.put(`http://localhost:8080/cashier/update-status`, { codeCashier: codeCashier, status: "WAITING_PAYMENT" });
-    const WAITING_PAYMENT = response.data.status;
-    console.log("Status do caixa atualizado com sucesso para AGUARDANDO PAGAMENTO:", WAITING_PAYMENT);
+    console.log("Status do caixa atualizado com sucesso para AGUARDANDO PAGAMENTO:", response.data.status);
     return true;
   } catch (error) {
     console.error('Erro ao fechar a venda:', error);
@@ -71,17 +68,15 @@ export const receivedPayment = async (inputValue, codeCashier, setChangeValue, s
     //se nao houver erro, prossiga para o calculo de rebimento de valores - total = troco
     if (!isNaN(inputValue)) {
       const response = await axios.put(`http://localhost:8080/cashier/change`, { codeCashier: codeCashier, receivedAmount: parseFloat(inputValue) });
-      const change = response.data;
-      console.log('Troco:', change);
+      console.log('Troco:', response.data);
 
-      setChangeValue(change);//atualiza o troco
+      setChangeValue(response.data);//atualiza o troco
       setTotalReceived(parseFloat(inputValue)); // Define o valor recebido
       setValueEntered(true); // Define como verdadeiro para esconder o campo de valor recebido
 
       //se tudo ocorrer como o esperado, atualiza o status do pagamento para - PAGO
       const responseStatus = await axios.put(`http://localhost:8080/cashier/update-status`, { codeCashier: codeCashier, status: "PAID" });
-      const PAID = responseStatus.data.status;
-      console.log("Status do caixa atualizado com sucesso para PAGO:", PAID);
+      console.log("Status do caixa atualizado com sucesso para PAGO:", responseStatus.data.status);
 
       return true; // Retorna verdadeiro para indicar que o pagamento foi processado com sucesso
 
@@ -116,15 +111,12 @@ export const analyseOfCashier = async (codeCashier, finishSale) => {
     // Analisa o status e atualiza se necessário
     if (cashier && cashier.status === "PAID") {
       const responseStatus = await axios.put(`http://localhost:8080/cashier/update-status`, { codeCashier: codeCashier, status: "FINISHED" });
-      const status = responseStatus.data.status;
-      console.log("Status do caixa atualizado com sucesso - CAIXA FINALIZADO :", status);   
+      console.log("Status do caixa atualizado com sucesso - CAIXA FINALIZADO :", responseStatus.data.status);   
       localStorage.removeItem('codeCashier');
       finishSale()
       return;
     }
-
-    console.log("MONITORANDO PAGAMENTO...");
-
+    
   } catch (error) {
     console.error("Erro ao monitorar pagamento:", error);
   }
@@ -134,15 +126,14 @@ export const exitCashier = (logout) => {
   logout();
 };
 
-// export const startNewTransaction = async () => {
-//   try {
-//     // Limpa o código do caixa no LocalStorage para iniciar uma nova transação
-//     localStorage.removeItem('codeCashier');
-//     console.log('Nova transação iniciada. O código do caixa foi removido do LocalStorage.');
-//   } catch (error) {
-//     console.error('Erro ao iniciar nova transação:', error);
-//     throw error;
-//   }
-// };
-
+export const startNewTransaction = async () => {
+  try {
+    // Limpa o código do caixa no LocalStorage para iniciar uma nova transação
+    localStorage.removeItem('codeCashier');
+    console.log('Nova transação iniciada. O código do caixa foi removido do LocalStorage.');
+  } catch (error) {
+    console.error('Erro ao iniciar nova transação:', error);
+    throw error;
+  }
+};
 

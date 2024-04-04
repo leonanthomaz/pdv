@@ -1,7 +1,7 @@
 package app.vercel.leonanthomaz.pdv.controller;
 
-import app.vercel.leonanthomaz.pdv.model.User;
-import app.vercel.leonanthomaz.pdv.repository.UserRepository;
+import app.vercel.leonanthomaz.pdv.model.Auth;
+import app.vercel.leonanthomaz.pdv.repository.AuthRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private AuthRepository authRepository;
 
     @GetMapping("/{registration}")
-    public ResponseEntity<User> findUserWithRegistration(@PathVariable String registration) {
-        User user = (User) userRepository.findByRegistration(registration);
-        if (user != null) {
-            return ResponseEntity.ok(user);
+    public ResponseEntity<Auth> findUserWithRegistration(@PathVariable String registration) {
+        Auth auth = (Auth) authRepository.findByRegistration(registration);
+        if (auth != null) {
+            return ResponseEntity.ok(auth);
         } else {
             return ResponseEntity.notFound().build();
         }

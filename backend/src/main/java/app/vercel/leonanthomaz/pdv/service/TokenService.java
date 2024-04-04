@@ -1,7 +1,7 @@
 package app.vercel.leonanthomaz.pdv.service;
 
-import app.vercel.leonanthomaz.pdv.model.User;
-import app.vercel.leonanthomaz.pdv.repository.UserRepository;
+import app.vercel.leonanthomaz.pdv.model.Auth;
+import app.vercel.leonanthomaz.pdv.repository.AuthRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -24,20 +24,20 @@ public class TokenService {
     private String secret = "MinhaPalavra";
 
     @Autowired
-    private UserRepository userRepository;
+    private AuthRepository authRepository;
 
     /**
      * Cria um token JWT para o usuário.
      *
-     * @param user O usuário para o qual o token será criado.
+     * @param auth O usuário para o qual o token será criado.
      * @return O token JWT gerado.
      */
-    public String createToken(User user) {
+    public String createToken(Auth auth) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("login")
-                    .withSubject(user.getRegistration())
+                    .withSubject(auth.getRegistration())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
@@ -72,14 +72,14 @@ public class TokenService {
      * @param token O token JWT contendo as informações do usuário.
      * @return Os detalhes do usuário.
      */
-    public User getUserDetailsFromToken(String token) {
+    public Auth getUserDetailsFromToken(String token) {
         try {
             String registration = JWT.require(Algorithm.HMAC256(secret))
                     .withIssuer("login")
                     .build()
                     .verify(token)
                     .getSubject();
-            return (User) userRepository.findByRegistration(registration);
+            return (Auth) authRepository.findByRegistration(registration);
         } catch (JWTVerificationException exception) {
             log.error("Erro na validação do Token: {}", exception.getMessage());
             return null;

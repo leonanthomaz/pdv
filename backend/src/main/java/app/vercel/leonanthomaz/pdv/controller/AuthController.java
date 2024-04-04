@@ -3,9 +3,9 @@ package app.vercel.leonanthomaz.pdv.controller;
 import app.vercel.leonanthomaz.pdv.dto.LoginDTO;
 import app.vercel.leonanthomaz.pdv.dto.RegisterDTO;
 import app.vercel.leonanthomaz.pdv.dto.TokenDTO;
-import app.vercel.leonanthomaz.pdv.model.User;
-import app.vercel.leonanthomaz.pdv.repository.UserRepository;
+import app.vercel.leonanthomaz.pdv.model.Auth;
 import app.vercel.leonanthomaz.pdv.service.TokenService;
+import app.vercel.leonanthomaz.pdv.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private UserRepository userRepository;
+    private AuthService authService;
     @Autowired
     private TokenService tokenService;
 
@@ -33,16 +33,16 @@ public class AuthController {
     public ResponseEntity login(@RequestBody @Valid LoginDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.getRegistration(), data.getPassword());
         var auth = this.authenticationManager.authenticate(usernamePassword);
-        var token = tokenService.createToken((User) auth.getPrincipal());
+        var token = tokenService.createToken((Auth) auth.getPrincipal());
         return ResponseEntity.ok(new TokenDTO(token));
     }
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data){
-        if(this.userRepository.findByRegistration(data.getRegistration()) != null) return ResponseEntity.badRequest().build();
+        if(authService.findByRegistration(data.getRegistration()) != null) return ResponseEntity.badRequest().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.getPassword());
-        User newUser = new User(data.getName(), data.getRegistration(), data.getEmail(), encryptedPassword, data.getRole());
-        this.userRepository.save(newUser);
+        Auth newAuth = new Auth(data.getName(), data.getRegistration(), data.getEmail(), encryptedPassword, data.getRole());
+        authService.save(newAuth);
         return ResponseEntity.ok().build();
     }
 

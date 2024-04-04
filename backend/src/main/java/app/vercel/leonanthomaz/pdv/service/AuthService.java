@@ -1,5 +1,7 @@
 package app.vercel.leonanthomaz.pdv.service;
 
+import app.vercel.leonanthomaz.pdv.model.Auth;
+import app.vercel.leonanthomaz.pdv.repository.AuthRepository;
 import app.vercel.leonanthomaz.pdv.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,10 +13,10 @@ import org.springframework.stereotype.Service;
  * Serviço responsável por lidar com operações relacionadas a usuários.
  */
 @Service
-public class UserService implements UserDetailsService {
+public class AuthService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private AuthRepository authRepository;
 
     /**
      * Carrega os detalhes do usuário pelo nome de usuário (registro).
@@ -25,6 +27,14 @@ public class UserService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String registration) throws UsernameNotFoundException {
-        return userRepository.findByRegistration(registration);
+        return authRepository.findByRegistration(registration);
+    }
+
+    public Auth save(Auth auth){
+        return authRepository.save(auth);
+    }
+
+    public UserDetails findByRegistration(String registration){
+        return authRepository.findByRegistration(registration);
     }
 }
