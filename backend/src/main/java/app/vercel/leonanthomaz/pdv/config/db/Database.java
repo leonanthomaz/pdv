@@ -1,6 +1,6 @@
 package app.vercel.leonanthomaz.pdv.config.db;
 
-import app.vercel.leonanthomaz.pdv.enums.UserRole;
+import app.vercel.leonanthomaz.pdv.enums.AuthRole;
 import app.vercel.leonanthomaz.pdv.model.Auth;
 import app.vercel.leonanthomaz.pdv.model.Product;
 import app.vercel.leonanthomaz.pdv.repository.AuthRepository;
@@ -23,7 +23,7 @@ public class Database {
                     .registration("12960")
                     .email("funcionario1@example.com")
                     .password(passwordEncoder().encode("123"))
-                    .role(UserRole.ADMIN)
+                    .role(AuthRole.ADMIN)
                     .build();
 
             Auth funcionario2 = Auth.builder()
@@ -31,7 +31,7 @@ public class Database {
                     .registration("14165")
                     .email("funcionario2@example.com")
                     .password(passwordEncoder().encode("456"))
-                    .role(UserRole.USER)
+                    .role(AuthRole.USER)
                     .build();
 
             Product product1 = Product.builder()

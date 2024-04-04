@@ -2,7 +2,6 @@ package app.vercel.leonanthomaz.pdv.service;
 
 import app.vercel.leonanthomaz.pdv.model.Auth;
 import app.vercel.leonanthomaz.pdv.repository.AuthRepository;
-import app.vercel.leonanthomaz.pdv.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,7 +28,6 @@ public class AuthService implements UserDetailsService {
     public UserDetails loadUserByUsername(String registration) throws UsernameNotFoundException {
         return authRepository.findByRegistration(registration);
     }
-
     public Auth save(Auth auth){
         return authRepository.save(auth);
     }

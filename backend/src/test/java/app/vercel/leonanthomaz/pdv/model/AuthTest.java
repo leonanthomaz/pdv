@@ -1,6 +1,6 @@
 package app.vercel.leonanthomaz.pdv.model;
 
-import app.vercel.leonanthomaz.pdv.enums.UserRole;
+import app.vercel.leonanthomaz.pdv.enums.AuthRole;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +16,7 @@ public class AuthTest {
             .registration("9876543210")
             .email("leonan.thomaz@gmail.com")
             .password(passwordEncoder().encode("123"))
-            .role(UserRole.valueOf("ADMIN"))
+            .role(AuthRole.valueOf("ADMIN"))
             .build();
     public static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

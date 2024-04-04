@@ -3,7 +3,7 @@ package app.vercel.leonanthomaz.pdv.enums;
 /**
  * Enumeração que representa o nível de autorização de usuário em um sistema.
  */
-public enum UserRole {
+public enum AuthRole {
 
     /**
      * Nível de administrador.
@@ -22,7 +22,7 @@ public enum UserRole {
      *
      * @param role O nível do usuário.
      */
-    UserRole(String role) {
+    AuthRole(String role) {
         this.role = role;
     }
 

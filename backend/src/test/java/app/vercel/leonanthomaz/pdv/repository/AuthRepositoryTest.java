@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
-@DisplayName("Testes para o repositorio userRepository.")
+@DisplayName("Testes para o repositorio authRepository.")
 @Log4j2
 class AuthRepositoryTest {
 

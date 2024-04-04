@@ -19,7 +19,8 @@ public class ProductRepositoryTest {
     private ProductRepository productRepository;
 
     @Test
-    public void testSaveProduct() {
+    @DisplayName("Retorna produto se dados foram válidos")
+    public void createProduct_WhenSuccess_ReturnProduct() {
         Product product = Product.builder()
                 .name("Product A")
                 .price(10.0)
@@ -34,7 +35,8 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void testFindById() {
+    @DisplayName("Retorna produto por id")
+    public void findByIdProduct_WhenSuccess_ReturnProduct() {
         Product product = Product.builder()
                 .name("Product A")
                 .price(10.0)
@@ -53,7 +55,8 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void testFindByCodeBar() {
+    @DisplayName("Retorna produto por código de barras")
+    public void findByCodeBarProduct_WhenSuccess_ReturnProduct() {
         Product product = Product.builder()
                 .name("Product A")
                 .price(10.0)

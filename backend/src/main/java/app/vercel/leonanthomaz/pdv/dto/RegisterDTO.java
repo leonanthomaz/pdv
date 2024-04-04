@@ -1,6 +1,6 @@
 package app.vercel.leonanthomaz.pdv.dto;
 
-import app.vercel.leonanthomaz.pdv.enums.UserRole;
+import app.vercel.leonanthomaz.pdv.enums.AuthRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,5 +36,5 @@ public class RegisterDTO {
     /**
      * O papel (role) do usuário a ser registrado.
      */
-    private UserRole role;
+    private AuthRole role;
 }

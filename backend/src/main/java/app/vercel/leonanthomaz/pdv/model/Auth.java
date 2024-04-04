@@ -1,6 +1,6 @@
 package app.vercel.leonanthomaz.pdv.model;
 
-import app.vercel.leonanthomaz.pdv.enums.UserRole;
+import app.vercel.leonanthomaz.pdv.enums.AuthRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
@@ -49,13 +49,12 @@ public class Auth implements UserDetails {
     /**
      * Papel/Permissão do usuário no sistema.
      */
-    @NotEmpty(message = "Campo obrigatório!")
-    private UserRole role;
+    private AuthRole role;
 
     /**
      * Construtor padrão.
      */
-    public Auth(String name, String registration, String email, String password, UserRole role) {
+    public Auth(String name, String registration, String email, String password, AuthRole role) {
         this.name = name;
         this.registration = registration;
         this.email = email;
@@ -68,7 +67,7 @@ public class Auth implements UserDetails {
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UserRole.ADMIN) {
+        if (this.role == AuthRole.ADMIN) {
             return List.of(new SimpleGrantedAuthority("ADMIN"), new SimpleGrantedAuthority("USER"));
         } else {
             return List.of(new SimpleGrantedAuthority("USER"));
